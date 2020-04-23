@@ -22,7 +22,7 @@ The Searcher lets you find the complete information about Android, Playstore app
 - [x] Added AJAX request.
 - [x] Used Bootstrap theme.
 - [x] Added Unit testing.
-- [x] Register modal to admin to manage the database.
+- [x] Register model on admin site to manage the database.
 - [x] Added 404 Page.
 - [x] Validation for package name, appID, appName and url.
 -----------------------------------------------
