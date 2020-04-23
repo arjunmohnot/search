@@ -5,7 +5,7 @@
 
 <div align="center">
 
-![Django](https://img.shields.io/badge/django%20versions-%203.0.5-blue)
+[![Django](https://img.shields.io/badge/django%20versions-%203.0.5-blue)](https://pypi.org/project/Django/)
  [![Python](https://forthebadge.com/images/badges/made-with-python.svg)](https://www.python.org/)
 </div> 
 
