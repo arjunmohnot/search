@@ -1,0 +1,83 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="App Finder,Searcher,Meta Finder,The Searcher lets you find the complete information about Android, Playstore apps. It can also help you to suggest meta-tags based on the website url saved in the ever-growing databse.">
+        <meta name="author" content="Arjun Mohnot, @MohnotArjun, https://arjun009.github.io/">
+        <meta name="generator" content="Jekyll v3.8.6">
+        {% block title %}
+        {% endblock %}
+        <link rel="canonical" href="https://getbootstrap.com/docs/4.4/examples/pricing/">
+        <!-- Bootstrap core CSS -->
+        <link href="https://getbootstrap.com/docs/4.4/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <!-- Favicons -->
+        <link rel="apple-touch-icon" href="https://www.elastic.co/favicon.ico" sizes="180x180">
+        <link rel="icon" href="https://www.elastic.co/favicon.ico" sizes="32x32" type="image/png">
+        <link rel="icon" href="https://www.elastic.co/favicon.ico" sizes="16x16" type="image/png">
+        <link rel="manifest" href="https://www.elastic.co/favicon.ico">
+        <link rel="mask-icon" href="https://www.elastic.co/favicon.ico" color="#563d7c">
+        <link rel="icon" href="https://www.elastic.co/favicon.ico">
+        <meta name="theme-color" content="#563d7c">
+        <style>
+            .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            }
+            @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+            font-size: 3.5rem;
+            }
+            }
+        </style>
+        <style>
+            body {
+            color: #506784;
+            background:
+            linear-gradient(
+            rgba(255, 255, 255, 0.6),
+            rgba(255, 255, 255, 0.6)
+            ),
+            url("https://raw.githubusercontent.com/plotly/dash-docs/master/images/dash-pattern.png");
+            margin: 0px;
+            }
+            ::-webkit-scrollbar {
+            width: 15px;
+            }
+            ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            }
+            ::-webkit-scrollbar-thumb {
+            border-radius: 15px;
+            background: rgba(0, 0, 0, 0.2);
+            }
+        </style>
+        <!-- Custom styles for this template -->
+        <link rel="stylesheet" type="text/css" href='{% static "pricing.css" %}'>
+    </head>
+    <body>
+        <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+            <h5 class="my-0 mr-md-auto font-weight-normal">Searcher</h5>
+            <nav class="my-2 my-md-0 mr-md-3">
+                <a class="p-2 text-dark" href="/">Home</a>
+                <a class="p-2 text-dark" href="/appSearch">App Searcher</a>
+                <a class="p-2 text-dark" href="/keyword">Keyword Finder</a>
+            </nav>
+            <a class="btn btn-outline-primary" target="_blank" href="https://twitter.com/MohnotArjun">Follow <span class="fa fa-twitter"></span></a>
+        </div>
+        {% block content %}
+        {% endblock %}
+        <footer class="mastfoot mt-auto" style="z-index:-1000;position: fixed !important; bottom: 0  !important;text-align:center !important;width: 100%; margin-top: 10% !important;">
+            <div class="inner">
+                <p>Made with 	&#128420; by <a target="_blank" href="https://arjun009.github.io/">Arjun Mohnot</a></p>
+            </div>
+        </footer>
+        </div>
+    </body>
+</html>

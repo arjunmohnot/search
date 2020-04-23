@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+<title>Home - Searcher </title>
+{% endblock %}
+{% block nav %}
+<a class="nav-link active" href="/">Home</a>
+<a class="nav-link" href="/appSearch">App Searcher</a>
+<a class="nav-link" href="/keyword">Keyword Finder</a>
+{% endblock %}
+{% block content %}
+<main role="main" class="inner cover mastfoot mt-auto pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center" style="text-align:center !important;">
+    <h1 class="cover-heading" style="margin-bottom:5%;"><b>App-Meta Searcher</b></h1>
+    <p class="lead"><b>The Searcher lets you find the complete information about Android, Playstore apps. It can also help you to suggest meta-tags based on the website url saved in the ever-growing database.</b></p>
+    <p class="lead">
+    <div class="row center inner cover mastfoot mt-auto pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center" style="text-align:center;">
+        <a href="/appSearch/" class="btn btn-lg btn-secondary inner cover mastfoot mt-auto pricing-header  mx-auto text-center">App Searcher</a>
+        <a href="/keyword/" class="btn btn-lg btn-secondary inner cover mastfoot mt-auto pricing-header mx-auto text-center">Keyword Finder</a>
+    </div>
+    </p>
+</main>
+{% endblock %}

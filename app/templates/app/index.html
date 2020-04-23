@@ -1,0 +1,228 @@
+{% extends "base1.html" %}
+{% load static %}
+{% block title %}
+<title>App Searcher - Searcher </title>
+<link rel="stylesheet" type="text/css" href='{% static "style.css" %}'>
+{% endblock %}
+<!--{% block nav %}
+    <a class="nav-link" href="/">Home</a>
+    <a class="nav-link active" href="/appSearch">App Searcher</a>
+    <a class="nav-link" href="/keyword">Keyword Finder</a>
+    {% endblock %}-->
+{% block content %}
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h1 class="display-4"><b>App Searcher</b></h1>
+    <p class="lead"><b>Get all the app information by its package-id for Android and with app name, app-id for Apple-IOS instantly.</b></p>
+    <kbd>For e.g.</kbd> <kbd>Android: com.optimisation.arjun.optimisation</kbd> <span> </span>
+    <p><kbd>IOS: void-troopers-sci-fi-tapper, 1367822033</kbd></P>
+</div>
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <div style="text-align:left !important; ">
+        <label for="dropDown" style="text-align:left !important;">Select Store</label>
+        <form method="get" id="form1" action="appSearch/form">
+            {% csrf_token %}
+            <select class="custom-select d-block w-20" id="dropDown" required">
+                <option selected disabled style="display:none;">Choose here</option>
+                <option value="playstore" >Play Store</option>
+                <option value="appstore" >App Store</option>
+            </select>
+        </form>
+        <div id="getForm" style="display:none;">
+            <form method="get" id="form2" action="appSearch/playstore">
+                <div class="form-group" style="margin-top:3%;">
+                    <label for="package">Android-Package</label>
+                    <input type="text" class="form-control" id="package" placeholder="Enter Android-Package Name">
+                </div>
+                <button type="submit" class="btn btn-primary" id='btn1' onClick="load()" >Submit</button>
+            </form>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+            <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+            <script src='{% static "script.js" %}'></script>
+        </div>
+        <div id="getForm1" style="display:none;">
+            <form method="get" id="form2" action="appSearch/playstore">
+                <div class="form-group">
+                    <label for="appName"  style="margin-top:2%;" >App Name</label>
+                    <input type="text" class="form-control" id="appName" placeholder="Enter App Name">
+                    <label for="appID"  style="margin-top:2%;" >App ID</label>
+                    <input type="text" class="form-control" id="appID" placeholder="Enter App ID">
+                </div>
+                <button type="submit" class="btn btn-primary" id='btn2' onClick="load1()" >Submit</button>
+            </form>
+        </div>
+        <div id="getForm2" style="display:none;"> Error</div>
+        <div id="myDiv"  style="display:none;">
+            <div class="wrapper">
+                <div class="card radius shadowDepth1">
+                    <div class="card__image border-tlr-radius">
+                        <img id="image-name" src="https://lh3.googleusercontent.com/peiGETB7g7YhTx0GlKoYwrntCBUkdg_ekmrCHknYvo_-hr3mn8lGZQ4_hZtwXN_YtNo" alt="image" class="border-tlr-radius">
+                    </div>
+                    <div class="card__content card__padding">
+                        <div class="card__share">
+                            <div class="card__social" style="width:70px !important;">
+                                <a target="_blank" class="share-icon twitter" href="https://twitter.com/intent/tweet?hashtags=appsearcher,keywordfinder,django,opensource,ajax,appstore,playstore&text=Developed%20by%20https://arjun009.github.io/%20Arjun%20Mohnot%20Website%20Link%20https://app-meta-searcher.herokuapp.com/"><span class="fa fa-twitter"></span></a>
+                                <a class="share-icon facebook" href="#" style="display:none;"><span class="fa fa-facebook"></span></a>
+                                <a class="share-icon googleplus" href="#" style="display:none;"><span class="fa fa-google-plus"></span></a>
+                            </div>
+                            <a id="share" class="share-toggle share-icon" href="#"></a>
+                        </div>
+                        <div class="card__meta">
+                            <table>
+                                <tbody>
+                                    <tr class="hotel_a">
+                                        <td>
+                                            <h4>Rating</h4>
+                                            <div class="stars-outer">
+                                                <div class="stars-inner"></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <h4 style="margin-top:2%;margin-bottom:2%;">Total Review: <span id="review-name">10</span></h4>
+                        </div>
+                        <article class="card__article">
+                            <h2><span id="title-name">Mining Optimization</span></h2>
+                            <p><span id="description-name">💎 The new technique is developed to evaluate the project by combined analysis of total investment, operating cost, cost of production, working profitability, mine life and the net present value (NPV). ...</span></p>
+                        </article>
+                    </div>
+                    <div class="card__action">
+                        <p id="installs-name"></p>
+                        <div class="card__author">
+                            <div class="card__author-content">
+                                By: <a target="_blank" id="developer_url-name" href="https://arjun009.github.io/"><span id="author-name">Arjun Mohnot</span></a>
+                            </div>
+                            <p></p>
+                            <p><a target="_blank" id="link-name" href="https://play.google.com/store/apps/details?id=com.optimisation.arjun.optimisation">See App</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+    $("#dropDown").change(function(){
+      
+      $('#myDiv').hide();
+       $.ajax({                       // initialize an AJAX request
+       type:"GET",
+           url: "/appSearch/form",                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+           data: {
+             'drop_val': $("#dropDown").val()       // add the country id to the GET parameters
+           },
+           success: function (data) {   // `data` is the return of the `load_cities` view function
+    		if(data=='1'){
+    			//PlayStore
+    			$("#getForm1").hide();
+    			$("#getForm").show();
+    		}
+    		if(data=='2'){
+    			//appstore
+    			$("#getForm").hide();
+    			$("#getForm1").show();  
+    		}
+    		if(data=='0'){
+    			//Error
+    			$("#getForm2").text('Error'); 
+    		}
+             
+           }
+         });
+    });
+</script>
+<script type="text/javascript">
+    function load()
+    {	  $('#btn1').prop("disabled",true);
+    
+         $.ajax({
+         type:"GET",
+         url: "/appSearch/playstore",
+         data: { package_val: $("#package").val()}
+         }).done(function(msg){
+      
+    	if("error" in msg){
+    			alert(msg["error"]);
+    			$('#btn1').prop("disabled",false);
+    	}
+    	else{
+        $('#title-name').text(msg['title']);
+        $('#review-name').text(msg['reviews']);
+    	$('#installs-name').text(msg['installs']);
+        $('#description-name').text(msg['description']);
+        $('#author-name').text(msg['author']);
+    	$('#image-name').attr('src', msg['icon']);
+    	$('#developer_url-name').attr('href', msg['developerLink']);
+    	$('#link-name').attr('href', msg['url']);
+    	console.log(msg);
+        $('#btn1').prop("disabled",false);
+    	
+       const ratings = {
+     hotel_a: msg['rating'],};
+    
+    
+    // total number of stars
+    const starTotal = 5;
+    
+    for (const rating in ratings) {
+     const starPercentage = ratings[rating] / starTotal * 100;
+     const starPercentageRounded = `${Math.round(starPercentage / 10) * 10}%`;
+     document.querySelector(
+     `.${rating} .stars-inner`).
+     style.width = starPercentageRounded;
+    }
+          $("#myDiv").show();
+       }
+         });
+    }
+    
+</script>
+<script type="text/javascript">
+    function load1()
+    {	  $('#btn2').prop("disabled",true);
+    
+         $.ajax({
+         type:"GET",
+         url: "/appSearch/appstore",
+         data: { app_val: [$("#appName").val(),$("#appID").val()]}
+         }).done(function(msg){
+      
+    	if("error" in msg){
+    			alert(msg["error"]);
+    			$('#btn2').prop("disabled",false);
+    	}
+    	else{
+    	$('#installs-name').text('');
+        $('#title-name').text(msg['title']);
+        $('#review-name').text(msg['reviews']);
+        $('#description-name').text(msg['description']);
+        $('#author-name').text(msg['author']);
+    	$('#image-name').attr('src', msg['icon']);
+    	$('#developer_url-name').attr('href', msg['developerLink']);
+    	$('#link-name').attr('href', msg['url']);
+    	console.log(msg);
+        $('#btn2').prop("disabled",false);
+    	
+       const ratings = {
+     hotel_a: msg['rating'],};
+    
+    
+    // total number of stars
+    const starTotal = 5;
+    
+    for (const rating in ratings) {
+     const starPercentage = ratings[rating] / starTotal * 100;
+     const starPercentageRounded = `${Math.round(starPercentage / 10) * 10}%`;
+     document.querySelector(
+     `.${rating} .stars-inner`).
+     style.width = starPercentageRounded;
+    }
+          $("#myDiv").show();
+       }
+         });
+    }
+    
+</script>
+{% endblock %}

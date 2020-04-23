@@ -1,0 +1,128 @@
+{% extends "base1.html" %}
+{% load static %}
+{% block title %}
+<title>Keyword Finder - Searcher </title>
+<link rel="stylesheet" type="text/css" href='{% static "style.css" %}'>
+<style>
+    #records_table_url {
+    word-wrap: break-word !important;
+    overflow-x: auto !important;
+    }
+</style>
+{% endblock %}
+<!--{% block nav %}
+    <a class="nav-link" href="/">Home</a>
+    <a class="nav-link active" href="/appSearch">App Searcher</a>
+    <a class="nav-link" href="/keyword">Keyword Finder</a>
+    {% endblock %}-->
+{% block content %}
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h1 class="display-4"><b>Keyword Finder</b></h1>
+    <p class="lead"><b>It lets you find the meta-tags of the given website and the associated websites with similar meta-tags in the database.</b></p>
+    <kbd>For e.g.</kbd> <kbd>https://www.gamesgames.com/ </kbd> <span> </span><kbd>https://www.agame.com/</kbd>
+</div>
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <div style="text-align:left !important; ">
+        <div id="Form" style="margin-bottom:1% !important;">
+            <form method="get" id="form2">
+                <div class="form-group" style="margin-top:-3%;">
+                    <label for="text-form">URL</label>
+                    <input type="text" class="form-control" id="text-form" placeholder="Enter the URL">
+                </div>
+                <button style="margin-bottom:10%!important;" type="submit" class="btn btn-primary" id='btn-form' onClick="load()" >Submit</button>
+            </form>
+            <div class="card text-white bg-dark mb-1" id="card1" style="display:none;margin-top:5% !important;" >
+                <div class="card-header">
+                    <h5 id="h31" style="margin-top:1%" ></h5>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title"></h5>
+                    <p class="card-text">
+                    <div id="records_table_tags"></div>
+                    </p>
+                </div>
+            </div>
+            <div class="card text-white bg-dark mb-1" id="card2" style="display:none;margin-top:5% !important;" >
+                <div class="card-header">
+                    <h5 id="h32" style="margin-top:1%" ></h5>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title"></h5>
+                    <p class="card-text">
+                    <div id="records_table_url"></div>
+                    </p>
+                </div>
+            </div>
+            <div class="card text-white bg-dark mb-1" id="card3" style="display:none; margin-top:5% !important;margin-bottom:15% !important; ">
+                <div class="card-header">
+                    <h5 id="h33" style="margin-top:1%" ></h5>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title"></h5>
+                    <p class="card-text">
+                    <div id="records_table_recommend"></div>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+    function load()
+    {	  $('#btn-form').prop("disabled",true);
+    
+       
+    	
+    
+       $.ajax({                       // initialize an AJAX request
+       type:"GET",
+           url: "key",                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+           data: {
+             'url': $("#text-form").val()       // add the country id to the GET parameters
+           },
+           success: function (msg) {   // `data` is the return of the `load_cities` view function
+    		if("error" in msg){
+    			alert(msg["error"]);
+    			$('#btn-form').prop("disabled",false);
+    	}
+    	else{
+    	
+    	if(msg["errorCode"]){
+    		
+    	$('#records_table_url').html(msg['errorCode']);
+    	
+    	$('#card1').hide();
+    	$('#card3').hide();
+    	$('#card2').show();
+    	
+    	}
+    	else{
+    	$('#h31').html("Tags for "+$("#text-form").val() );
+           $('#records_table_tags').html(msg['html']['Tags']);
+    	
+    	$('#h32').html("Similar Tags in the Database");
+           $('#records_table_url').html(msg['html']['Associated Tags']);
+    	
+    	
+    	$('#h33').html("Recommended Tags");
+           $('#records_table_recommend').html(msg['html']['Recommend Tags']);
+    	
+    	$('#card1').show();
+    	$('#card2').show();
+    	$('#card3').show();
+    	}
+    	
+    	
+        $('#btn-form').prop("disabled",false);
+    	}
+             
+           }
+         });
+    
+    		
+    	}
+    	
+</script>
+{% endblock %}
